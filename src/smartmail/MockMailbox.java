@@ -43,6 +43,7 @@ public class MockMailbox implements Mailbox {
     @Override public void restoreFromTrash(EmailMessage m) { if (trash.remove(m)) inbox.add(m); }
     @Override public void archive(EmailMessage m) { if (inbox.remove(m)) archive.add(m); }
     @Override public void purgeTrash() { trash.clear(); }
+    public long trashBytes() { return trash.stream().mapToLong(EmailMessage::getSizeInBytes).sum(); }
     public int trashCount() { return trash.size(); }
     public int archiveCount() { return archive.size(); }
 }
